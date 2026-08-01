@@ -3,6 +3,7 @@ package com.satyam.smartqueue.service;
 import com.satyam.smartqueue.dto.LoginRequest;
 import com.satyam.smartqueue.dto.LoginResponse;
 import com.satyam.smartqueue.entity.User;
+import com.satyam.smartqueue.enums.Role;
 import com.satyam.smartqueue.exception.EmailAlreadyExistsException;
 import com.satyam.smartqueue.exception.InvalidPasswordException;
 import com.satyam.smartqueue.exception.ResourceNotFoundException;
@@ -38,6 +39,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Phone number already exists");
         }
 
+        user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
